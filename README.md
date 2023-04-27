@@ -5,13 +5,13 @@ This website's code is entirely open source and is hosted here.  In addition to 
 
 ## Sitemap
 
-Homepage
-	Celestial Mechanics 
-		The Two-Body Problem
-		Kepler Elements
-		Hamiltonians
-		Louisville's Theorem
-	Numerical Integration
+* Homepage
+	* Celestial Mechanics 
+		* The Two-Body Problem
+		* Kepler Elements
+		* Hamiltonians
+		* Louisville's Theorem
+	* Numerical Integration
 		Intro to Finite Difference
 		Explicit Runge-Kutta
 		Explicit Multistep
@@ -20,7 +20,7 @@ Homepage
 		Predictor Correctors
 		Adaptive Integrators
 		Symplectic Integrators
-	Analytic Techniques
+	* Analytic Techniques
 		Laurent Series
 		Legendre Polynomials
 		Multipole Expansions
