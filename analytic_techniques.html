@@ -73,7 +73,7 @@
     
 	This last difficulty can frequently be overcome using tricks with the Taylor series as - like the Taylor series - if the Laurent series exists it is unique.  Hence if an expression of the given form can be generated - by any means - it must be equivalent to the Laurent series.
     
-	The traditional example of such a trick can be seen with the Laurent series of the flat function \( e^{-1/x^2} \). Note that this function has a singularity at x=0, so no Taylor series can be taken about this point. Here the easiest way to derive its Laurent series is to start with the Taylor series of \(e^{-w} \)about \( w=0 \).
+	The traditional example of such a trick can be seen with the Laurent series of the flat function \( e^{-1/x^2} \). Note that this function has a singularity at \(x=0 \), so no Taylor series can be taken about this point. Here the easiest way to derive its Laurent series is to start with the Taylor series of \(e^{-w} \)about \( w=0 \).
     
 	$$ e^w = \sum_{n=0}^\infty \frac{w^n}{n!}$$
     
@@ -81,7 +81,7 @@
     
 	$$ e^w = \sum_{n=0}^\infty (-1^n) \frac{x^{-2n}}{n!} $$  
     
-	The series is now of  \( e^{-1/x^2} \).  This series has negative terms in the exponent - just as we'd expect from a Laurent series. All of the positive terms are zero in this example - hence why we can write our sum as going from \(0\) to \(\infty \) (rather than \(-\infty\) to \(\infty \)).  This should make sense qualitatively as - all x to any positive power diverges as \( x \rightarrow \infty \).  Our function does not have this behavior, so such terms cannot appear in the sum. We show some partial sums of the series below.  Note that since \( w = -1/x^2 \) and we took our series about w=0, our Laurent series is effectively taken about \( x = \infty \).  
+	The series is now of  \( e^{-1/x^2} \).  This series has negative terms in the exponent - just as we'd expect from a Laurent series. All of the positive terms are zero in this example - hence why we can write our sum as going from \(0\) to \(\infty \) (rather than \(-\infty\) to \(\infty \)).  This should make sense qualitatively as - all x to any positive power diverges as \( x \rightarrow \infty \).  Our function does not have this behavior, so such terms cannot appear in the sum. We show some partial sums of the series below.  Note that since \( w = -1/x^2 \) and we took our series about \(w=0\), our Laurent series is effectively taken about \( x = \infty \).  
 	</p>
     
 	<br>
@@ -160,9 +160,6 @@
     
 	$$\phi = Gm_1 m_2  \sum_{l=0}^{\infty} \frac{r_1^l}{r_2^{l-1}} P_l(cos(\theta_{12})) $$
 
-    Talk about the forward, backward, central difference schemes here.
-
-    To derive the finite difference iteration corresponding to a differential equation, we can use the limit definition of the derivative.  As an example, let's consider the simplest differential equation:
 </p>
 
 	<h3>Example:</h3>
@@ -205,7 +202,7 @@
 
 <p>
  
-  In this case, the convergence is far better! Even our second-order approximation fits \( \phi \) relatively closely!  Our conclusions here generalize.  Typically Legendre polynomial expansions of perturbing potentials are most useful when those perturbations are weak.  If the perturbations are strong, expect to have to go to a very high order for the approximation to be accurate.  
+  In this case, the convergence is far better! Even our second-order approximation fits \( \phi \) relatively closely!  Our conclusions here generalize.  Typically, Legendre polynomial expansions of perturbing potentials are most useful when those perturbations are weak.  If the perturbations are strong, expect to have to go to a very high order for the approximation to be accurate.  
   </p>
 
 
