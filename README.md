@@ -12,15 +12,15 @@ This website's code is entirely open source and is hosted here.  In addition to 
 		* Hamiltonians
 		* Louisville's Theorem
 	* Numerical Integration
-		Intro to Finite Difference
-		Explicit Runge-Kutta
-		Explicit Multistep
-		Stiffness
-		Implicit Methods
-		Predictor Correctors
-		Adaptive Integrators
-		Symplectic Integrators
+		* Intro to Finite Difference
+		* Explicit Runge-Kutta
+		* Explicit Multistep
+		* Stiffness
+		* Implicit Methods
+		* Predictor Correctors
+		* Adaptive Integrators
+		* Symplectic Integrators
 	* Analytic Techniques
-		Laurent Series
-		Legendre Polynomials
-		Multipole Expansions
+		* Laurent Series
+		* Legendre Polynomials
+		* Multipole Expansions
