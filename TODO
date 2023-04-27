@@ -1,0 +1,14 @@
+A list of stuff that may be worth covering in the future:
+	Nonlinear Dynamics
+	butterfly orbits
+	Potential/Force due to massive ring?
+	Canonical transformations
+	Laplace Coefficient, needed in disturbing function expansions. 
+	Derivation of spherical harmonics
+	First order MMR.
+	CR3BP or ER3BP
+	Kozai Oscillaitons
+	Phase space comparison of sympletic integrators.
+	Superconvergence occurs for the earth-sun system for the 3rd and 4th order integratros. This is a good excuse to explore that. 
+	
+	

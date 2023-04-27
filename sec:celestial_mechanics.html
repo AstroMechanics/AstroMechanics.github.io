@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+<head>
+  <title>Astro Mechanics</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="styles.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js'></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+	<div class="navbar-header">
+<!--  	<a class="navbar-brand" href="testlogo.png">WebSiteName</a> -->
+  	<a href="#" class="navbar-left"><img src="./code/src/logo/logo.gif" width="50" height="50"></a>
+	</div>
+	<ul class="nav navbar-nav">
+  	<li><a href="./index.html">Home</a></li>
+  	<li class="active"><a href="./sec:celestial_mechanics.html">Celestial Mechanics</a></li>
+  	<li><a href="./sec:numerical_integration.html">Numerical Integration</a></li>
+  	<li><a href="./sec:analytic_techniques.html">Analytic Techniques</a></li>
+	</ul>
+  </div>
+</nav>
+
+
+
+<div class="header2">
+ 	<h1>Celestial Mechanics</h1>
+</div>
+
+<div class="header3">
+<p>   The methods of celestial mechanics often differ in significant ways from the methods of familiar to most undergrads.  Most celestial mechanics use the Hamiltonian formulation of celestial mechanics as opposed to Newton’s laws.  In addition, many of the assumptions that go into constructing a Hamiltonian system that serves as a good approximation to a dynamical system are often not fully explained.  Finally, very little can be done fully analytically in celestial mechanics. Hence, a series of approximations are typically used - each having its own domain of relevance. In this section, we explore the basics of celestial mechanics and the Hamiltonian formulation. 
+</p>
+</div>
+
+<div class="navigation">
+	<ul>
+    	<li><a href="#section-twobodyproblem">The Two Body Problem</a></li>
+    	<li><a href="#section-kepler_elements">Kepler Elements</a></li>
+    	<li><a href="#section-hamiltonians">Hamiltonians</a></li>
+    	<li><a href="#section-louisville">Louisville's Thorem</a></li>
+	</ul>
+</div>
+
+<div id="section-twobodyproblem" class="tab-content">
+
+	<h1>The Two Body Problem</h1>
+	<p>The solution to the two body problem forms the foundation of celestial mechanics. While simple, any discussion without treatment of the two-body problem would be incomplete.  The basic setup is to consider the motion of two point masses m_1 and m_2 acting under mutual gravitational attraction with the force  
+    
+	$$\vec{F_{12}} = m_1 \frac{d^2 \vec{r_1}}{dt^2}$$
+	$$\vec{F_{21}} = m_2 \frac{d^2 \vec{r_2}}{dt^2}$$
+    
+	Newton's second law. \( F_{12} = -F_{21} \).  Now we can consider the center of mass of the system. Located at
+    
+	$$\vec{r}_{cm} = \frac{m_1 \vec{r_1} + m_2 \vec{r_2}}{m_1+m_2}$$
+    
+	Let's find the acceleration of this point, since
+    
+	$$\frac{d^2 \vec{r}_{cm}}{dt^2} = \frac{1}{m_1+m_2} \left(m_1 \frac{d^2 \vec{r_1}}{dt^2} + m_2 \frac{d^2 \vec{r_2}}{dt^2} \right)$$
+    
+	in other terms,  
+    
+	$$\frac{d^2 \vec{x}_{cm}}{dt^2} = \frac{1}{m_1+m_2} \left(\vec{F_{12}} + \vec{F_{21}} \right) = 0$$
+    
+	If the acceleration is zero, the center of mass moves with a uniform, constant velocity in some direction.  Now we conider the difference of these two vectors \( \vec{\delta r} = \vec{r_1} - \vec{r_2} \).  We can also find the acceleration of this difference as
+    
+	$$\frac{d^2 \vec{\delta r }}{dt^2} =  \frac{\vec{F_{12}}}{m_1} - \frac{\vec{F_{21}}}{m_2} $$
+    
+	Since the forces are equal and opposite, this reduces to
+    
+	$$ \mu \frac{d^2 \vec{\delta r }}{dt^2} =  \vec{F_{12}} $$
+    
+	Where \( \mu = \frac{m_1 m_2}{m_1+m_2} \) the reduced mass. This is the same form as the one-body problem. Finally, we note that our original vectors can be written in terms of \( \vec{r}_{cm} \) and \( \vec{\delta r} \).
+    
+    
+	$$ \vec{r_1} = \vec{r}_{cm} +\frac{m_2}{m_1+m_2} \vec{\delta r}  $$
+	$$ \vec{r_2} = \vec{r}_{cm} +\frac{m_1}{m_1+m_2} \vec{\delta r}  $$    
+    
+	Since the motion  \( \vec{r}_{cm} \) is trivial, as the center of mass moves in a straight line, all of the interesting physics comes from that of \( \vec{\delta r} \) which is just a one-body problem. Hence, when in the center of the mass frame, the two-body problem is equivalent to just two scaled one-body problems - with each mass tracing out its solution independently of the other.
+    
+	<h3> The one-body problem </h3>
+    
+	Now the only thing we have left to solve is the one-body problem.
+    
+	$$ m \frac{d^2 \vec{\delta r }}{dt^2} =  \vec{F_{12}} $$
+    
+	Since two body motion is planar, we can now solve this equation in polar coordinates.
+	$$ m \{ \frac{d^2r}{dt^2} - r \frac{d\theta}{dt}^2 + 2 \frac{dr}{dt} \frac{d\theta}{dt} \} = \{ -\frac{G M m}{r}  , 0 \} $$
+    
+	Since there's no accleration in the \( \theta \) direction angular momentum is constant, (\ L = m r^2 \frac{d\theta}{dt} \). Thus, the problem reduces to a single radial equation:  
+    
+	$$ \frac{d^2r}{dt^2} - r \frac{d\theta}{dt}^2 = -\frac{G M}{r}   $$
+    
+	This can be written in terms of the angular momentum as
+	$$ \frac{d^2r}{dt^2} = -\frac{G M}{r} + \frac{L^2}{m^2 r^3}   $$
+    
+	This equation is still tough to solve. Two tricks and final steps are necessary to make it tractable. The first is to rephrase it in terms of \( u = 1/r \). The second is to notice that our expression for angular momentum implies
+    
+	$$dt = \frac{L u^2}{m} d\theta$$
+    
+	hence
+    
+	$$\frac{dr}{dt} = \frac{d}{dt} \frac{1}{u} = -\frac{1}{u^2} \frac{du}{dt} = - \frac{L}{m} \frac{du}{d\theta}$$
+    
+	Finally we can transform our equation into
+    
+	$$ \frac{d^2u}{d\theta^2} + u = \frac{G M m^2}{L^2}$$
+    
+	this equation has a known solution!  transforming back to \( r \) we have
+    
+	$$\frac{1}{r} = \frac{G M m^2}{L^2} + k \cos(\theta) $$
+    
+	for some constant k.  This is exactly the equation of an ellipse, with the source of attraction at one focus.
+	</p>
+</div>
+
+<div id="section-kepler_elements" class="tab-content">
+	<h1>Kepler elements</h1>
+<p> Now that we've found that Kepler orbits can be defined by ellipses.  These ellipses are often described in terms of 6 main Kepler elements.   They are:
+
+<br>
+<br>
+<b>Semi-major axis</b> (a).  This element parameterizes the size of the ellipse along its longest diameter. Alternatively, it's the length of the line segment that runs through both foci of the ellipse. An orbit can theoretically have any semi-major axis, but very large semi-major axes are only weakly bound to their hosts, and very small semi-major axes may impact their hosts.
+
+<br>
+<br>
+<b>Eccentricity</b> (e).  The eccentricity is a value from \(0 \leq e \leq 1 \) and parameterizes the shape of the ellipse.  For \( e =0 \) the resulting ellipse is a circle and as \( e \) increases the ellipse becomes more stretched out, eventually becoming parabolic for \(e=1 \).
+
+<br>
+<br>
+<b>True Anomaly</b> (\(\nu\) or \(\theta\) or \(f\) ).  The true anomaly parameterizes the location of a body in its orbit.  It is the angle between the body's periapsis and its current position as seen from the focus point of the ellipse.  As an angle \(0 \leq \nu \leq 2\pi \)
+
+<br>
+With these three elements, we've managed to specify the shape and size of an orbit and the position of a body in that orbit.  What's left is to specify the orientation of the orbit with respect to some reference frame.  The classic approach to this is to do so by specifying three angles. This might take the form of rotation matrices, Euler angles, or some other type.  In our case, the traditional three angles are the inclination, argument of periapsis, and longitude of the ascending node.
+
+<br>
+<br>
+<b>Inclination</b> (i).  The inclination parameterizes the tilt of the ellipse relative to some reference plane. As an angle, it can take any value from \(0 \leq i \leq 2\pi \), with values greater than \( \pi \) describing retrograde motion.
+
+<br>
+<br>
+<b>Argument of periapsis</b> ( \( \omega \) ).  The argument of periapsis parameterizes the orientation of the ellipse with respect to the orbital plane.  In other words, it sets the angle of periapse passage with respect to some reference plane, as an angle \(0 \leq \omega \leq 2\pi \).
+<br>
+<br>
+<b>Lnongitude of the Ascending Node</b> ( \( \Omega \) ).  The longitude of the ascending node parameterizes the orientation of the ascending node of the ellipse with respect to some reference plane.  Any ellipse will pass through a plane intersecting its center at two points.  The ascending node is the point where the orbit passes from the negative to positive coordinates in the reference plane.  Like \( \omega \), \( \Omega \) can take any value \(0 \leq \Omega \leq 2\pi \).
+
+We can play with these coordinates in the graphic below to help get an understanding of the role of each.
+</p>
+   <div id="keplerplot">
+    <p>Eccentricity [\(e\)]</p>
+    <form oninput="amount.value=rangeInput1.value">
+      <input type="range" id="slider1" name="rangeInput1" step="0.05" min="0.0" max="0.95" value="get_min()" oninput="update()"/>
+      <output name="amount" for="slider1"></output>
+    </form>
+    
+    <p>Inclination [\(i\)]</p>
+    <form oninput="amount.value=rangeInput2.value">
+      <input type="range" id="slider2" name="rangeInput2" step="0.05" min="0.0" max="6.28" value="get_min()" oninput="update()"/>
+      <output name="amount" for="slider2"></output>
+    </form>
+
+    <p>Argument of periapsis [\( \omega\)]</p>
+    <form oninput="amount.value=rangeInput3.value">
+      <input type="range" id="slider3" name="rangeInput3" step="0.05" min="0.0" max="6.28" value="get_min()" oninput="update()"/>
+      <output name="amount" for="slider3"></output>
+    </form>
+
+    <p>Longitude of the ascending node [\(\Omega\)]</p>
+    <form oninput="amount.value=rangeInput4.value">
+      <input type="range" id="slider4" name="rangeInput4" step="0.05" min="0.0" max="6.28" value="get_min()" oninput="update()"/>
+      <output name="amount" for="slider4"></output>
+    </form>
+
+    <p>True Anomaly [\(\nu\)]</p>
+    <form oninput="amount.value=rangeInput5.value">
+      <input type="range" id="slider5" name="rangeInput5" step="0.05" min="0.0" max="6.28" value="get_min()" oninput="update()"/>
+      <output name="amount" for="slider5"></output>
+    </form>
+    
+  <script src =interactive_orbit.js></script>
+  </div>
+
+
+
+
+<p> <br>
+There are also several derive elements that bear mentioning, these are a function of the 6 basic Kepler elements.  The most common ones are
+
+<br>
+<br>
+<b>Mean anomaly</b> (M).  Like the true anomaly, the mean anomaly parameterizes the position of a planet in its orbit. However, the mean anomaly is linearly related to time, with \( M = n(t-t_0) \) with \( n = \frac{2 \pi}{P} \) where \( P \) is the body's orbital period. While convenient mathematically, it does not, in general,  correspond to any physical angle in an orbit.
+<br>
+<br>
+<b>Eccentric anomaly</b> (E).  Like the true anomaly, the eccentric anomaly parameterizes the position of a planet in its orbit. It can be related to the true anomaly by \( \tan(\nu/2) = \sqrt{\frac{1+e}{1-e}}\tan(E/2) \)
+
+</p>
+
+</div>
+ 
+<div id="section-hamiltonians" class="tab-content">
+	<h1>Hamiltonians</h1>
+	<p> Up till now we've stuck to newtonian mechanics.  In general Newtonian mechanics adopts the following strategy for solving a nbody problem.
+	<br><br>
+	1. Write out all the forces
+	<br>
+	2. Use F=ma to derive a system of differential equations governing the bodies' behavior (these are the equations of motion).
+	<br><br>
+	There's nothing physically incorrect about this approach, at least in classical mechanics it will always result in the correct equations of motion - if done correctly.  However, this caveat is a significant one.   Consider writing out the differential equations governing the general three-body problem.  First, since each body lives in a three-dimensional space, F will be a vector with three components. Each of the three bodies will then have its own equations of motion.  This results in a total of 9 scalar coupled differential equations to be numerically solved.  This is certainly a challenge!  
+	<br>
+	The Hamiltonian formalism changes things by defining the Hamiltonian of a system H as the sum of its kinetic and potential energies \( H = T+V \).  The exciting thing about this formalism is that the equations of motion can be written simply using Hamilton's equations, i.e.
+    
+	$$\frac{d\vec{q}}{dt} = \frac{\partial H}{\partial \vec{p}}$$
+	and
+	$$\frac{d\vec{p}}{dt} = -\frac{\partial H}{\partial \vec{q}} $$
+
+	Where here \( \vec{q} \) and \( \vec{p} \) are the canonical positions and canonical momenta of the system.  The advantage of this method is that all the dynamics of a system can be encoded into a single object - the Hamiltonian - upon which all the equations of motion depend. Not all systems can be written in this way, but systems that conserve energy can.  Hence, analysis of the hamiltonian itself is often sufficient to reach conclusions about the system.  However, this formulation immediately raises an important question. What makes these coordinates 'canonical'
+    
+	<h3> Canonical Coordinates </h3>
+    
+	For a set of coordinates to be canonical three conditions must be met.  
+	$$\{q^i,q^j\} = 0$$
+	$$\{p_i,p_j\} = 0$$
+	$$\{q^i,p_j\} = 0$$
+    
+	where here we've written our condition in terms of the Poisson bracket.  The Poisson bracket is defined as follows:
+    
+	$$\{f,g\} = \sum_{i=1}^N ( \frac{\partial f}{\partial q_i} \frac{\partial g}{\partial p_i} - \frac{\partial f}{\partial p_i} \frac{\partial g}{\partial q_i})$$
+    
+	Maybe have an example here?
+    
+	<h3> Pendulum Example  </h3>
+    
+	While our main goal is to understand celestial mechanics; it's worth testing our knowledge on simpler systems first.  Consider the case of the motion of a pendulum.  Its motion can be characterized by some angle \theta with potential energy written as \( V(\theta) = m g l (1- cos(\theta)) \) and its kinetic energy \( \frac{1}{2} m l^2 (\frac{d\theta}{dt})^2 \). The lagrangian is therefore:
+    
+	$$L = \frac{1}{2} m l^2 (\frac{d\theta}{dt})^2 -  m g l (1- cos(\theta))  $$
+    
+	We've parameterized the motion with position $\theta$ but we need the conjugate canonical momentum. To find this we appeal to
+    
+	$$P_{\theta} = \frac{\partial L}{\partial \dot\theta} = m l^2 \dot\theta$$
+    
+	It's Hamiltonian is then - in terms of conjugate coordinates
+    
+	$$H = \frac{P_\theta^2}{2 m l^2} + m g l (1 - \cos(\theta)) $$
+    
+	Finally, since our hamiltonian is a function of two dynamical variables \( (P_\theta, \theta) \) we can now plot the energies of the pendulum as a function of those constants.  The result is the following plot.
+    
+    
+	<br>
+    <figure>
+    <img src="./code/celestial_mechanics/hamiltonians/hamiltonian_pendulum.png" width="50%" height="50%" class="center"/>
+    <figcaption>The hamiltonian of a pendulum expressed in terms of its dynamical variables. </figcaption>
+    </figure>
+	<br>
+    
+	Ths plot tells us a lot about our system.
+	<br><br>
+	1. Since energy is conserved along our contours the only freedom our system has to move, from a given set of initial conditions is along those contours. Hence - these contours also correspond to the trajectories through Hamiltonian Phase Space.
+	<br><br>
+ 	2. There's a clear separation between two different types of trajectories here (shown by our dashed black line). Inside the black line trajectories curve back on themselves and explore only a small range of \theta. Outside the line, they loop across the entire domain. This black line is referred to as a separatrix and separates topologically distinct regions of the phase space. In this case, we have a bit of intuition about the problem and can physically interpret these different states.  The closed curves result in an oscillation about zero and occur when the momentum is low.  This corresponds to harmonic oscillation about \theta = 0.  The open curves explore all theta and occur when momentum is large - this must correspond to the case where the pendulum is swinging fully around its pivot point.
+ 	<br>
+ 	Overall, hamiltonian phase space gives us tools to gain significant insight into physical systems - however, it comes at the cost of pushing those systems into large numbers of dimensions.  In our 1D case, we have a 2-dimensional Hamiltonian phase space; more generally for N differential equations, we can expect phase space to be 2N dimensional. This also explains why we work the harmonic oscillator instead of an orbital problem, while hamiltonians are useful for celestial mechanics typically the resulting phase space is high-dimensional and often cannot be shown explicitly.
+    
+	<br>
+	Hence, one last question remains to be answered.  If, as we've seen in our harmonic oscillator example, conjugate momenta often aren't just the strict derivatives of their corresponding positions: which variables - if any - correspond to a system of two body orbits?  The answer is that there are several sets of conjugate variables that will do the job.  One of the most popular is the Poincare variables with positions given by \( (l,g,h) \) and the corresponding momenta given by \( (L,G,H) \).  They can be defined in terms of Kepler elements as follows:
+    
+	$$ l = M $$
+	$$ g = \omega $$
+	$$ h = \Omega $$
+	$$ L = \mu \sqrt{ G(m_1+m_2) a } $$
+	$$ G = \mu \sqrt{ G(m_1+m_2) a (1-e^2) } $$
+	$$ H = \mu \sqrt{ G(m_1+m_2) a (1-e^2)} cos(i) $$
+    
+	When written in this form, the hamiltonian of a two-body kepler orbit takes on a particularly simple form.
+    
+	$$H = - \frac{G^2(m_1+m_2)^2 \mu^3}{2 L^2} $$
+    
+	At this point, it's worth sanity-checking our equations. Since this Hamiltonian has only one dynamical variable \(L\), the only nonzero derivatives with respect to the momenta will be \( \frac{\partial H}{\partial L} \).  Hence only \(l\) - the mean anomaly - will change over time.  We'd expect \(g = \omega \) and \(h = \Omega \) to be constant.  This is exactly the behavior of a one-body orbit!
+
+	</p>
+</div>
+
+<div id="section-louisville" class="tab-content">
+	<h2>Louiville's Theorem.</h2>
+	<p>
+	Louiville's theorem states, that as a group of initial conditions evolves according to hamilton's equations, the infinitesimal phase space volume is conserved.  While strictly, Louisville's theorem only applies to infinitesimal phase volume, there are a few systems for which phase volume is conserved more generally, not just in the infinitesimal limit.  One of these systems is the simple harmonic oscillator.  We can see an example of this more general phase space volume conservation by taking several initial conditions and plotting the enclosed volume as those systems are integrated.
+    
+ 	<br>
+    <figure>
+    <img src="./code/celestial_mechanics/louisville_theorem/shm.gif" width="50%" height="50%" class="center"/>
+    <figcaption>Several simple harmonic oscillators with different initial conditions being integrated.  </figcaption>
+    </figure>
+	<br>
+    
+	This passes a few sanity checks. Notice how each trajectory in phase space is constrained to a single contour - thus energy is conserved. Additionally, notice the similarity of this phase space to the structure of that of the pendulum.  This is because, for small deviations from equilibrium, the simple harmonic oscillator well approximates the motion of a pendulum.  Since the contours are circles, the enclosed phase space volume simply rotates on its axis.  We can build additional intuition by incorporating a damping force.  
+    
+ 	<br>
+    <figure>
+    <img src="./code/celestial_mechanics/louisville_theorem/shm_damped.gif" width="50%" height="50%" class="center"/>
+    <figcaption>Several simple harmonic oscillators with different initial conditions being integrated.  </figcaption>
+    </figure>
+	<br>
+    
+	Suddenly energy is no longer conserved, and the trajectories spiral towards the equilibrium point - which is also the lowest energy state.  At the same time, the conservation of phase space volume also breaks, and the inscribed volume contracts toward zero.  Now that we can see the trajectories, it's not at all surprising that Louisville's theorem would fail here, nor is it surprising that Hamiltonians are most useful for isolated systems that exhibit energy conservation.
+	</p>
+</div>
+
+<div id="section-kozai" class="tab-content">
+	<h2>Kozai Lidov Oscillations</h2>
+	<p>One of the most famous results of celestial mechanics is that of kozai lidov oscillations.  These oscillations occur in a triple system where one body is taken to be a test mass.
+    
+    
+	The Hamiltonian for such a system is
+    
+	$$ H = \frac{G m_1 m_2}{2 a_1} + \frac{G (m_1+m_2) m_3}{2 a_2} + H_{pet} $$
+    
+	Here the first two components correspond to the energies of the orbits and the third part is due to the interactions between the bodies.  
+    
+	The perturbative part of the Hamiltonian can then be expanded in terms of the Legendre Polynomials
+    
+	$$H_{pet} = \frac{G}{a_2} \sum_{j=2}^\inf \fracbrac{a_1}{a_2}^j M_j \fracbrac{r_1}{a_1}^j \fracbrac{a_2}{r_2}^{j+1} P_j(cos(\theta))
+    
+	here M_j = m_1 m_2 m_3 \frac{m_1^{j-1} - (-m_2)^{j-1}}{(m_1+m_2)^j}
+    
+	up to here, everything can be derived from the three body problem directly.  However, the next step involves averaging H_{pet} over both mean anomalies.  This step is quite involved - but the result is simple, so we'll simply quote it.
+    
+	$$H_{avg,pet} = C ((2+3e_1^2)(1 - 3 cos(i)^2 ) - 15e_1^2 (1-cos(i)^2)(cos(2 \omega_1)))$$
+	with
+	$$C  = \frac{3}{8} \frac{G m_1 m_3}{a_2 (1-e_2^2)^{3/2}} \fracbrac{a_1}{a_2}^2  
+    
+	where we've assumed $m_2 = 0$.   In this limit, the z component of the angular momentum of the inner orbit (L_z = cos(\theta) \sqrt{1-e_1^2}).
+    
+	Hence our Hamiltonian can be represented in terms of three variables $e_1$, \theta = cos(i_{rel}), and \omega_1.
+    
+    
+	</p>
+</div>
+
+ 
+</div>
+
+
+<div class="footer2">    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="./jquery_script.js"></script>
+
+</body>
+</html>
+

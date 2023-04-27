@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <title>Astro Mechanics</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="styles.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+	<div class="navbar-header">
+<!--  	<a class="navbar-brand" href="testlogo.png">WebSiteName</a> -->
+  	<a href="#" class="navbar-left"><img src="./code/src/logo/logo.gif" width="50" height="50"></a>
+	</div>
+	<ul class="nav navbar-nav">
+  	<li><a href="./index.html">Home</a></li>
+  	<li><a href="./sec:celestial_mechanics.html">Celestial Mechanics</a></li>
+  	<li><a href="./sec:numerical_integration.html">Numerical Integration</a></li>
+  	<li class="active"><a href="./sec:analytic_techniques.html">Analytic Techniques</a></li>
+	</ul>
+  </div>
+</nav>
+
+
+
+<div class="header2">
+ 	<h1>Analytic Approaches</h1>
+</div>
+
+<div class="header3">
+<p>   Many systems in celestial mechanics are hierarchical, which - in practice - allows the systems to be described in approximate forms.  Hence, approximations are common in celestial mechanics and can often lead to insight on dynamical problems.  However, by necessity they often appear without being derived - or if they are - authors typically start with an approximate form chosen to be relevant to the problem in question.   Hence, it can be difficult for an otherwise uninitiated reader to see the 'big picture' associated with many of these approximations, or grasp their underlying assumptions. Here we provide rigiorous derivations of the approximate methods used in other sections; both for understanding and for reference.  All of the approaches we consider here are ubiquitious in celestial mechanics, especially in the study of planetary systems.
+</p>
+</div>
+
+<div class="navigation">
+	<ul>
+    	<li><a href="#section-laurent_series">Laurent Series</a></li>
+    	<li><a href="#section-legendre_polynomals">Legendre Polynomials</a></li>
+    	<li><a href="#section-multipole_expansion">Multipole Expansions</a></li>
+	</ul>
+</div>
+
+<div id="section-laurent_series" class="tab-content">
+	<h1>Laurent Series</h1>
+	<p>One of the most basic structures that occur in celestial mechanics is the notion of the Laurent series. One way to get a good idea of the intuition behind such series is to contrast them with the more common Taylor series.
+    
+	The Taylor series expansion about some (potentially complex) function about some location \(x_0 \) is </p>
+    
+	$$f(x) = \sum_{n=0}^\infty \frac{f^{(n)}(x_0)}{n!} (x-x_0)^n$$
+    
+	here \( f^{(n)} \) denotes the nth derivative of function f. Naturally, the form of the Taylor expansion assumes our function is differentiable about \(x_0\).
+    
+	The Laurent series, in contrast, takes the following form for complex functions
+    
+	$$f(x) = \sum_{n=-\infty}^{\infty} a_n (x - x_0)^n $$
+	with coefficients given by
+	$$a_n = \frac{1}{2 \pi i} \oint \frac{f(x)}{(x-c)^{n+1}} dx $$
+    
+	A few things stand out in this expansion, and it's worth acknowledging them explicitly.  First, negative powers may appear in the Laurent series - something that does not happen in the Taylor series.
+    
+	Second, our coefficients are defined only in terms of integration - hence there's no differentiability condition.  Laurent series can still converge when there are singularities!  Finally, there's an apparent change in complexity between the Laruent and Taylor series.  While a Taylor series can be straightforwardly computed, the Laurent series requires contour integration - a process that is much more difficult.  
+    
+	This last difficulty can frequently be overcome using tricks with the Taylor series as - like the Taylor series - if the Laurent series exists it is unique.  Hence if an expression of the given form can be generated - by any means - it must be equivalent to the Laurent series.
+    
+	The traditional example of such a trick can be seen with the Laurent series of the flat function \( e^{-1/x^2} \). Note that this function has a singularity at x=0, so no Taylor series can be taken about this point. Here the easiest way to derive its Laurent series is to start with the Taylor series of \(e^{-w} \)about \( w=0 \).
+    
+	$$ e^w = \sum_{n=0}^\infty \frac{w^n}{n!}$$
+    
+	Now we use a mathematical trick.  Let's take  \( w = -1/x^2 \).  Now, if the series can be written as
+    
+	$$ e^w = \sum_{n=0}^\infty (-1^n) \frac{x^{-2n}}{n!} $$  
+    
+	The sereis is now of  \( e^{-1/x^2} \).  This series has negative terms in the exponent - just as we'd expect from a Laurent series. All of the positive terms are zero in this example - hence why we can write our sum as going from \(0\) to \(\infty \) (rather than \(-\infty\) to \(\infty \)).  This should make sense qualitatively as - all x to any positive power diverges as \( x \rightarrow \infty \).  Our function does not have this behavior, so such terms cannot appear in the sum. We show some partial sums of the series below.  Note that since \( w = -1/x^2 \) and we took our series about w=0, our Laurent series is effectively taken about \( x = \infty \).  
+	</p>
+    
+	<br>
+    <figure>
+    <img src="./code/analytic_techniques/laurent_series/laurent1.png" width="50%" height="50%" class="center"/>
+    <figcaption>Laurent Series for \( e^{-1/x^2} \)</figcaption>
+    </figure>
+	<br>
+    
+	<p> Laurent series are often used in celestial mechanics to represent potentials that deviate from the typical \(1/r\) potential characteristic of a point source. Consider, for example, a radial potential of the form  
+    
+	$$V(r) = \frac{1}{r} \cdot (E^{-1/r} + 1) $$
+    
+	This potential can still be written as a Laurent series using the same trick. First, we take \(r=1/w\)
+    
+	$$ V(w) = w \cdot (E^{-w} + 1) $$
+    
+	This Talyor series has no closed form, but the first few terms can be written as follows:
+    
+	$$V(w) \approx 2w-w^2+\frac{w^3}{2}-\frac{w^4}{6}+\frac{w^5}{24}-\frac{w^6}{1
+   20}+\frac{w^7}{720}-\frac{w^8}{5040}+\frac{w^9}{40320}-\frac{
+   w^{10}}{362880}$$
+   
+	finally we can limit ourselves to the first \( n \) such terms and flip them back with by taking \( w=1/r \). We can plot the resulting partial sums and see they do indeed converge to our original function!
+    
+	$$V(r) \approx \frac{2}{r} - \frac{1}{r^{2}} + \frac{1}{2 r^{3}} - \frac{1}{6 r^{4}} + \frac{1}{24 r^{5}} - \frac{1}{120 r^{6}} + \frac{1}{720 r^{7}} - \frac{1}{5040 r^{8}} + \frac{1}{40320 r^{9}} - \frac{1}{362880 r^{10}}$$
+    
+    
+	<br>
+    <figure>
+    <img src="./code/analytic_techniques/laurent_series/laurent2.png" width="50%" height="50%" class="center"/>
+    <figcaption>Laurent Series for \(V(r) = \frac{1}{r} \cdot (E^{-1/r} + 1)\)</figcaption>
+    </figure>
+	<br>    
+	As usual with such sereis, convergest is quickes far from the singularity, it is only close to the body where accurate modeling of the potential requires higher order terms.
+    
+    
+</div>
+
+
+<div id="section-legendre_polynomals" class="tab-content">
+
+	<h1>Legendre Polynomial Expansions</h1>
+	<p>
+    
+	It's often the case when working the three body problem that we care about the interaction of two bodies with each other. Such a situation often includes the interaction term of the form:
+    
+	$$\phi = \frac{Gm_1 m_2}{|\vec{r_1}-\vec{r_2}|}$$
+    
+	while this can be written in closed form, such forms are typically not analytically tractable and provide little insight into the dynamics.  In celestial mechanics Legendre Polynomials are most often used to expand these terms, resulting in simpler, more instructive forms.
+	</p>
+	<h3>Derivation:</h3>
+    
+	<p> Consider the case of three gravitating bodies orbiting their common center of mass. As usual, we can always move into a frame in which one body is stationary at the origin.  Hence the problem is reduced to two bodies orbiting a stationary potential.  Let the vector pointing to object 1 be \( \vec{r_1} \) and object 1 to be \( \vec{r_2} \).  These bodies feel a potential of
+    
+	$$\phi = \frac{Gm_1 m_2}{|\vec{r_1}-\vec{r_2}|}$$
+    
+	Next we rewrite the denominator with the law of cosines. For any two vectors \( \vec{r_1} \) and \( \vec{r_2} \) the distance between them can be writen as \( \sqrt{r_1^2 + r_2^2 - 2 r_1 r_2 \cos(\theta_{12})} \).  Where here \( \theta_{12} = \theta_1 - \theta_2 \).  This identity follows directly from trigonometry, hence up to now, our derivation is exact. Interestingly, this expression can also be written as
+    
+	$$\sqrt{r_1^2 + r_2^2 - 2 r_1 r_2 \cos(\theta_{12})} = r_2 \sqrt{1- 2 h \cos(\theta_{12}) + h^2}$$
+    
+	where here we've defined \( h=\frac{r_1}{r_2} \)
+    
+	finally we can write the is as a series expansion in terms of the Legendre polynomials
+    
+	$$\sqrt{1- 2 h x+ h^2} = \sum_{l=1}^{\infty}h^lP_l(x) $$
+    
+	where \( P_l(x) \) are the Legendre polynomials. The first few legendre polynomials are:
+    
+	$$P_0(x) = 1$$
+	$$P_1(x) = x$$
+	$$P_2(x) = \frac{1}{2}(3x^2 -1)$$
+	$$P_3(x) = \frac{1}{2}(5x^2 - 3x)$$
+    
+	etc.   Hence the potential can be in terms of these polynomials as
+    
+	$$\phi = Gm_1 m_2  \sum_{l=0}^{\infty} \frac{r_1^l}{r_2^{l-1}} P_l(cos(\theta_{12})) $$
+
+    Talk about the forward, backward, central difference schemes here.
+
+    To derive the finite difference iteration corresponding to a differential equation, we can use the limit definition of the derivative.  As an example, let's consider the simplest differential equation:
+</p>
+
+	<h3>Example:</h3>
+ <p> As with every series expansion - seeing is believing! Let's test our expansion with the following setup.  consider two planets orbiting a single point. Further, assume they're locked on circular orbits - so there are no dynamical interactions and the orbits do not change over time. Under this constant-orbit assumption, our aim is to derive
+ 
+ 	$$\phi = \frac{Gm_1 m_2}{|\vec{r_1}-\vec{r_2}|} = \frac{Gm_1 m_2}{ \sqrt{r_1^2 + r_2^2 - 2 r_1 r_2 \cos(\theta_{12})} } $$
+ 
+  and show that the Legendre polynomial expansion converges to it. If we set the inner planet \(r_1 = 1\)  and the outer planet \(r_2 = 1.31\) this means that \(\theta_1 \) is a periodic function with period \( 1 \) and \(\theta_2 \) is a periodic function with period \( 1.5 \). For clarity the setup, from the top down and angles look as follows:
+  </p>
+ 
+   <br>
+   <figure>
+   <img src="./code/analytic_techniques/legendre_poly/legendre1.png" width="50%" height="50%" class="center"/>
+   <figcaption>A mockup of our test system</figcaption>
+   </figure>
+   <br>
+ 
+  <p>
+  This means the two planets realign every 3 orbits of the inner or two orbits of the outer. Hence \( \phi \) is a periodic function of period \( 3 \).  We can then show our approximations to \( \phi \) for truncated at various order \( n \).  
+ </p>
+
+   <br>
+   <figure>
+   <img src="./code/analytic_techniques/legendre_poly/legendre2.png" width="50%" height="50%" class="center"/>
+   <figcaption>Our expansion (eventually) converges to \( \phi \) everywhere! </figcaption>
+   </figure>
+   <br>
+   
+<p>
+ 
+  A few things stand out here. First is that while for large \( n \) our expansion mimics \( \phi \) extremely well, for small \( n \) our expansion can differ in some pretty significant ways, it dramatically undershoots the peaks at the closest approach, and also undershoots the valleys when the planets are on opposite sides of the system. This suggests that the expansion does not work very well at low-order for this system.  If we instead try a system that is less strongly perturbed, in this case by taking \(r_2 = 10\) instead, the convergence looks as follows:
+  </p>
+
+   <br>
+   <figure>
+   <img src="./code/analytic_techniques/legendre_poly/legendre3.png" width="50%" height="50%" class="center"/>
+   <figcaption>Here our expansion converges to \( \phi \) much more quickly! </figcaption>
+   </figure>
+   <br>
+
+<p>
+ 
+  In this case, the convergence is far better! Even our second-order approximation fits \( \phi \) relatively closely!  Our conclusions here generalize.  Typically Legendre polynomial expansions of perturbing potentials are most useful when those perturbations are weak.  If the perturbations are strong, expect to have to go to a very high order for the approximation to be accurate.  
+  </p>
+
+
+</div>
+
+<div id="section-multipole_expansion" class="tab-content">
+	<h1>Multipole Expansions</h1>
+	<p> It's often the case in celestial mechanics where we deal with potentials that aren't quite spherically symmetric.  These sorts of deviations are often due to irregularities on the surface of a body, this could be a tidal bulge, large craters, or - for small bodies - an irregular shape.  First, recall that any differential function defined on a sphere \( Y(\theta,\phi) \) can be represented as a spherical harmonic expansion as follows.
+    
+	$$ f(\theta,\phi) =  \sum_{l=0}^\infty \sum_{m=-l}^{l} C_l^m Y_l^m(\theta,\phi) $$
+    
+	Here the \( C_l^m \) are constants and the \( Y_l^m(\theta,\phi) \) are our spherical harmonic basis functions. It's worth taking a second to understand why this is a good approach.  Recall that spherical harmonics are - in essence - the two-dimensional equivalent of Fourier series.  Since our function is defined on a sphere, using periodic basis vectors to represent it in this way is natural. We can now generalize even further, for a three-dimensional potential, the expansion typically takes the following form
+    
+	$$V(r,\theta,\phi) = \sum_{j=1}^\infty \sum_{l=0}^\infty \sum_{m=-l}^l \frac{K_{i,j}^m}{r^j} Y_l^m(\theta,\phi)$$
+    
+	Where \( K_{i,j} \) are new constants.  Here we've taken advantage of the Laurent series and expanded the radial part of the potential in a series of negative powers. Also, note there are no negative \( j \) present in the sum - as a negative power of j would result in a dependence that goes as \( r^j \).  All of these functions do not vanish as \( r \rightarrow \infty \), hence they must be absent from the sum.  
+    
+    
+	<h3>Geopotenital Models</h1>
+    
+	This form of expansion is often used to construct geopotential models of the gravitational field of the earth or other body.  It typically takes some equivalent of the following form:
+    
+	$$V(r,\theta,\phi) = - \frac{G M}{r} + \sum_{n=2}^z \frac{J_n P_n^0(sin(\theta))}{r^{n+1}} + \sum_{n=2}^t \sum_{m=1}^n \frac{C_n^m cos(m \phi) P_n^m(sin(\theta))}{r^{n+1}} + \frac{S_n^m sin(m \phi) P_n^m(sin(\theta))}{r^{n+1}}$$
+    
+	where here we've written \(P_n^m \) are the associated Legendre polynomials, which can be related to the spherical harmonics.    
+	Here we have three sets of coefficients.  The first, the \(J_n\) parameterizes the first set of terms. These terms depend only on \theta, or polar angle, and are functions only of n and depend only on latitude.  The second set of coefficients \( C_n^m \) and \( S_n^m \) have terms that contain \( \phi \) dependence as well - hence they parameterize asymmetries in longitude on a body. These terms are a function of both n and m, hence - for a given n, there may be several needed to describe the potential.
+    
+	If the potential is axisymmetric then the \( C_n^m \) and \( S_n^m \) terms must all be zero since any nonzero value would induce a latitude dependence and break the axisymmetry
+    
+	<br>
+	<br>
+    
+	(The careful reader might object to this argument and note that it might  - in principle - be possible to cancel out the latitude dependence with careful choices of \( C_n^m \) and \( S_n^m \), however, this is impossible due to the orthogonality properties of the associated Legendre polynomials).
+    
+	<br>
+	<br>
+    
+	Hence, if the potential is axisymmetric we recover the traditional form
+    
+	$$V(r,\theta) = - \frac{G M}{r} + \sum_{n=2}^z \frac{J_n P_n^0(sin(\theta))}{r^{n+1}}$$
+    
+	which can be expressed given a series of \( J_n \).  For most bodies, \( J_2 \) dominates and higher-order moments are negligible for most applications.
+    
+ 	</p>
+</div>
+
+<div id="section-laplace_coefficients" class="tab-content">
+	<h2>Laplace Coefficients</h2>
+	<p>
+	Example of where it comes from
+    
+	The Laplace coefficient b_s^{(m)}(\alpha) is defined as follows:
+    
+	$$ b_s^{(m)}(\alpha) = \frac{1}{\pi} \int_0^{2\pi} \frac{cos(m\phi)}{1 - 2 \alpha cos(\phi) + \alpha^2}^s d\phi
+    
+	Here m is some natural number, s is a half-integer and \alpha is a positive real number.
+    
+	Talk about their derivatives.  hypergeometric series form?
+    
+	</p>
+</div>
+
+
+<div class="footer2">    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="./jquery_script.js"></script>
+
+</body>
+</html>
