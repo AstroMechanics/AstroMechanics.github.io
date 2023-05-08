@@ -10,7 +10,7 @@ This website's code is entirely open source and is hosted here.  In addition to 
 		* The Two-Body Problem
 		* Kepler Elements
 		* Hamiltonians
-		* Louisville's Theorem
+		* Liouville's Theorem
 	* Numerical Integration
 		* Intro to Finite Difference
 		* Explicit Runge-Kutta
