@@ -50,87 +50,91 @@
    	 <li><a href="#section-kepler_elements">Kepler Elements</a></li>
    	 <li><a href="#section-hamiltonians">Hamiltonians</a></li>
    	 <li><a href="#section-liouville">Liouville's Thorem</a></li>
+   	 <li><a href="#section-cr3bp">Circular Restricted 3 Body Problem</a></li>
     </ul>
 </div>
 
 <div id="section-twobodyproblem" class="tab-content">
 
-    <h1>The Two Body Problem</h1>
-    <p>The solution to the two body problem forms the foundation of much of celestial mechanics. Hence, while simple, any discussion of celestial mechanics without treatment of the two-body problem would be incomplete.  The basic setup is to consider the motion of two point masses \(m_1\) and \(m_2\) acting under mutual gravitational attraction with the force  
+<h1>The Two Body Problem</h1>
+<p>The solution to the two-body problem forms the foundation of much of celestial mechanics. Hence, while simple, any discussion of celestial mechanics without treatment of the two-body problem would be incomplete. The basic setup is to consider the motion of two point masses \(m_1\) and \(m_2\) acting under mutual gravitational attraction with the force  
     
-    $$\vec{F_{12}} = m_1 \frac{d^2 \vec{r_1}}{dt^2}$$
-    $$\vec{F_{21}} = m_2 \frac{d^2 \vec{r_2}}{dt^2}$$
+\[ \vec{F_{12}} = m_1 \frac{d^2 \vec{r_1}}{dt^2} \]
+\[ \vec{F_{21}} = m_2 \frac{d^2 \vec{r_2}}{dt^2} \]
     
-    Newton's second law. \( F_{12} = -F_{21} \).  Now we can consider the center of mass of the system. Located at
+according to Newton's second law. \(F_{12} = -F_{21}\). Now we can consider the center of mass of the system, located at
     
-    $$\vec{r}_{cm} = \frac{m_1 \vec{r_1} + m_2 \vec{r_2}}{m_1+m_2}$$
+\[ \vec{r}_{cm} = \frac{m_1 \vec{r_1} + m_2 \vec{r_2}}{m_1+m_2} \]
     
-    Let's find the acceleration of this point, since
+Let's find the acceleration of this point, since
     
-    $$\frac{d^2 \vec{r}_{cm}}{dt^2} = \frac{1}{m_1+m_2} \left(m_1 \frac{d^2 \vec{r_1}}{dt^2} + m_2 \frac{d^2 \vec{r_2}}{dt^2} \right)$$
+\[ \frac{d^2 \vec{r}_{cm}}{dt^2} = \frac{1}{m_1+m_2} \left(m_1 \frac{d^2 \vec{r_1}}{dt^2} + m_2 \frac{d^2 \vec{r_2}}{dt^2} \right) \]
     
-    in other terms,  
+In other terms,  
     
-    $$\frac{d^2 \vec{r}_{cm}}{dt^2} = \frac{1}{m_1+m_2} \left(\vec{F_{12}} + \vec{F_{21}} \right) = 0$$
+\[ \frac{d^2 \vec{r}_{cm}}{dt^2} = \frac{1}{m_1+m_2} \left(\vec{F_{12}} + \vec{F_{21}} \right) = 0 \]
     
-    If the acceleration is zero, the center of mass moves with a uniform, constant velocity in some direction.  Now we conider the difference of these two vectors \( \vec{\delta r} = \vec{r_1} - \vec{r_2} \).  We can also find the acceleration of this difference as
+If the acceleration is zero, the center of mass moves with a uniform, constant velocity in some direction. Now we consider the difference of these two vectors, \(\vec{\delta r} = \vec{r_1} - \vec{r_2\). We can also find the acceleration of this difference as
     
-    $$\frac{d^2 \vec{\delta r }}{dt^2} =  \frac{\vec{F_{12}}}{m_1} - \frac{\vec{F_{21}}}{m_2} $$
+\[ \frac{d^2 \vec{\delta r }}{dt^2} =  \frac{\vec{F_{12}}}{m_1} - \frac{\vec{F_{21}}}{m_2} \]
     
-    Since the forces are equal and opposite, this reduces to
+Since the forces are equal and opposite, this reduces to
     
-    $$ \mu \frac{d^2 \vec{\delta r }}{dt^2} =  \vec{F_{12}} $$
+\[ \mu \frac{d^2 \vec{\delta r }}{dt^2} =  \vec{F_{12}} \]
     
-    Where \( \mu = \frac{m_1 m_2}{m_1+m_2} \) the reduced mass. This is the same form as the one-body problem. Finally, we note that our original vectors can be written in terms of \( \vec{r}_{cm} \) and \( \vec{\delta r} \).
+Where \( \mu = \frac{m_1 m_2}{m_1+m_2} \) is the reduced mass. This is the same form as the one-body problem. Finally, we note that our original vectors can be written in terms of \( \vec{r}_{cm} \) and \( \vec{\delta r} \).
     
     
-    $$ \vec{r_1} = \vec{r}_{cm} +\frac{m_2}{m_1+m_2} \vec{\delta r}  $$
-    $$ \vec{r_2} = \vec{r}_{cm} +\frac{m_1}{m_1+m_2} \vec{\delta r}  $$    
+\[ \vec{r_1} = \vec{r}_{cm} + \frac{m_2}{m_1+m_2} \vec{\delta r} \]
+\[ \vec{r_2} = \vec{r}_{cm} + \frac{m_1}{m_1+m_2} \vec{\delta r} \]
     
-    Since the motion  \( \vec{r}_{cm} \) is trivial, as the center of mass moves in a straight line, all of the interesting physics comes from that of \( \vec{\delta r} \) which is just a one-body problem. Hence, when in the center of the mass frame, the two-body problem is equivalent to just two scaled one-body problems - with each mass tracing out its solution independently of the other.
-    
-    <h3> The one-body problem </h3>
-    
-    Now the only thing we have left to solve is the one-body problem.
-    
-    $$ m \frac{d^2 \vec{\delta r }}{dt^2} =  \vec{F_{12}} $$
-    
-    Since two body motion is planar, we can now solve this equation in polar coordinates.
-    $$ m \{ \frac{d^2r}{dt^2} - r \left(\frac{d\theta}{dt}\right)^2, r \frac{d^2\theta}{dt^2} + 2 \frac{dr}{dt} \frac{d\theta}{dt} \} = \{ -\frac{G M m}{r}  , 0 \} $$
-    
-    Since there's no accleration in the \( \theta \) direction angular momentum is constant, \( L = m r^2 \frac{d\theta}{dt} \). Thus, the problem reduces to a single radial equation:  
-    
-    $$ \frac{d^2r}{dt^2} - r \frac{d\theta}{dt}^2 = -\frac{G M}{r}   $$
-    
-    This can be written in terms of the angular momentum as
-    $$ \frac{d^2r}{dt^2} = -\frac{G M}{r} + \frac{L^2}{m^2 r^3}   $$
-    
-    This equation is still tough to solve. Two tricks and final steps are necessary to make it tractable. The first is to rephrase it in terms of \( u = 1/r \). The second is to notice that our expression for angular momentum implies
-    
-    $$dt = \frac{L u^2}{m} d\theta$$
-    
-    hence
-    
-    $$\frac{dr}{dt} = \frac{d}{dt} \frac{1}{u} = -\frac{1}{u^2} \frac{du}{dt} = - \frac{L}{m} \frac{du}{d\theta}$$
-    
-    Finally we can transform our equation into
-    
-    $$ \frac{d^2u}{d\theta^2} + u = \frac{G M m^2}{L^2}$$
-    
-    this equation has a known solution!  transforming back to \( r \) we have
-    
-    $$\frac{1}{r} = \frac{G M m^2}{L^2} + k \cos(\theta) $$
-    
-    for some constant k.  This is exactly the equation of an ellipse, with the source of attraction at one focus.<p>
-    <br>
-	<figure>
-	<img src="./code/celestial_mechanics/barycentric_orbits/barycenters.gif" width="50%" height="50%" class="center"/>
-	<figcaption>Two bodies of varying masses orbiting their common barycenters. In each of these plots \(m_1 = 1 \) </figcaption>
-	</figure>
-    <br>
+Since the motion \( \vec{r}_{cm} \) is trivial, as the center of mass moves in a straight line, all of the interesting physics comes from that of \( \vec{\delta r} \), which is just a one-body problem. Hence, when in the center of the mass frame, the two-body problem is equivalent to just two scaled one-body problems - with each mass tracing out its solution independently of the other.
 
-	<p> As always, seeing is believing. Here we show the solution to the two-body problem for the circular case for varying different mass ratios. In every case, the motion is equivalent to two one-body problems moving about a common center of mass. In addition, the logo of this site also exhibits two-body motion, but in the eccentric case.  We can see in that case the motion is still equivalent to one body motion about the center of mass!
-    </p>
+<h3>The One-Body Problem</h3>
+    
+Now the only thing we have left to solve is the one-body problem.
+    
+\[ m \frac{d^2 \vec{\delta r }}{dt^2} =  \vec{F_{12}} \]
+    
+Since two-body motion is planar, we can now solve this equation in polar coordinates.
+
+\[ m \left\{ \frac{d^2r}{dt^2} - r \left(\frac{d\theta}{dt}\right)^2, r \frac{d^2\theta}{dt^2} + 2 \frac{dr}{dt} \frac{d\theta}{dt} \right\} = \left\{ -\frac{G M m}{r}  , 0 \right\} \]
+
+Since there's no acceleration in the \( \theta \) direction, angular momentum is constant, \( L = m r^2 \frac{d\theta}{dt} \). Thus, the problem reduces to a single radial equation:  
+    
+\[ \frac{d^2r}{dt^2} - r \left(\frac{d\theta}{dt}\right)^2 = -\frac{G M}{r} \]
+
+This can be written in terms of angular momentum as
+    
+\[ \frac{d^2r}{dt^2} = -\frac{G M}{r} + \frac{L^2}{m^2 r^3} \]
+    
+This equation is still tough to solve. Two tricks and final steps are necessary to make it tractable. The first is to rephrase it in terms of \( u = 1/r \). The second is to notice that our expression for angular momentum implies
+    
+\[ dt = \frac{L u^2}{m} d\theta \]
+    
+Hence
+    
+\[ \frac{dr}{dt} = \frac{d}{dt} \frac{1}{u} = -\frac{1}{u^2} \frac{du}{dt} = - \frac{L}{m} \frac{du}{d\theta} \]
+    
+Finally, we can transform our equation into
+    
+\[ \frac{d^2u}{d\theta^2} + u = \frac{G M m^2}{L^2} \]
+    
+This equation has a known solution!  Transforming back to \( r \) we have
+    
+\[ \frac{1}{r} = \frac{G M m^2}{L^2} + k \cos(\theta) \]
+    
+for some constant \( k \). This is exactly the equation of an ellipse, with the source of attraction at one focus.
+</p>
+
+<figure>
+<img src="./code/celestial_mechanics/barycentric_orbits/barycenters.gif" width="50%" height="50%" class="center"/>
+<figcaption>Two bodies of varying masses orbiting their common barycenters. In each of these plots, \(m_1 = 1\) </figcaption>
+</figure>
+
+<p> As always, seeing is believing. Here we show the solution to the two-body problem for the circular case for varying different mass ratios. In every case, the motion is equivalent to two one-body problems moving about a common center of mass. In addition, the logo of this site also exhibits two-body motion, but in the eccentric case. We can see in that case the motion is still equivalent to one-body motion about the center of mass!
+</p>
+
 </div>
 
 <div id="section-kepler_elements" class="tab-content">
@@ -353,6 +357,132 @@ There are also several derived elements that bear mentioning.  These elements ar
     
     </p>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="section-cr3bp" class="tab-content">
+	<h1>Circular Restricted 3 Body Problem</h1>
+	<p> In general, the three-body problem has no closed-form solution and must be integrated numerically. However, in a few specific limiting cases, significant insight can be gained into the dynamics through analytic methods. In this case, we'll consider the example of the circular restricted three-body problem.  Our setup consists of two massive bodies and a third 'test particle'.  The two massive bodies are assumed to orbit their common center of mass in circular orbits.  Since the third body is massless, their motion reduces to the two-body case, which is exactly solvable.  Hence we wish to concern ourselves with the dynamics of the third body.  The typical approach here is to consider the energy - per unit mass - of the outer test particle. We use this quantity since it is conserved - like a typical energy - but is also better defined for massless particles.
+    
+    
+	To do this, we start by transforming into a rotating frame with the center of mass a the origin. Let's set our coordinate axes so that the binary rotates in the x-y plane. Let the coordinates in the nonrotating frame be denoted as \(x'\), \(y'\) and \(z'\), with the coordinates in the rotating frame be denoted   From here we can relate the new coordinate
+    
+	$$x = x' cos(\theta) - y' sin(\theta)$$
+	$$y = x' sin(\theta) + y' cos(\theta)$$
+	$$z = z' $$
+	with \( \theta = -arctan(y'/x') \).  The velocities can be transformed similarly. Following the same convention,
+    
+	$$v_x = v_x' + y'n$$
+	$$v_y = v_y' + y'n$$
+	$$v_z = z' $$
+    
+	In the nonprimed, rotating frame, this results in the two masses both lying at two fixed positions on the x-axis. These locations are
+    
+	$$x_1 = -\frac{m_1}{m_1+m_2} r_{12}  $$
+	$$x_2 = \frac{m_2}{m_1+m_2} r_{12}  $$
+    
+	where \( r_{12} \) is the initial seperation of the two bodies. Now that we've transformed into this frame we are now ready to compute the energy.  Since we're no longer in an inertial reference frame, we must take into account the rotational kinetic energy of the third body in our calculation. Hence:
+    
+	$$E = E_{rot} + E_{grav} + E_{kin}$$
+    
+	Let's start with the first term.  The general expression for rotational potential energy is \(E_{rot} = -\frac{1}{2}I \omega^2 \)  Here \( \omega = n = \frac{2 \pi}{P} \) with P equal to the orbital period of the two massive bodies about each other.  The moment of inertia of the third mass is just \(m_3 r^2\), where \(r = \sqrt{x^2 + y^2} \) is the distance to the axis of rotation. Hence we can write
+    
+	$$E_{rot} = -\frac{1}{2} m_3 r^2 n^2 = -\frac{m_3}{2} m_3 n^2 (x^2 + y^2)$$
+    
+	Next, let's consider the gravitational potential energy. In general, for two bodies of mass \(m_1\) and \(m_2\) we have \( E = - \frac{G m_1 m_2}{r} \). Therefore the gravitational kinetic energy in this situation can be written as  
+    
+	$$E_{grav} = -\frac{G m_1 m_3}{r_1} -\frac{G m_2 m_3}{r_2}$$
+    
+	where \( r_1 \) and \(r_2 \) are the distances to \(m_1\) and \( m_2 \) respectively. Finally, there's kinetic energy, which is simple to express using the traditional expression:
+    
+	$$E_{kin} = \frac{1}{2} m_3 (v_x^2 + v_y^2 + v_z^2) = \frac{1}{2} m_3 \vec{v}^2$$
+    
+	Finally, we can write the energy per unity mass as
+    
+	$$\mathcal{E} = -\frac{1}{2} n^2 (x^2 + y^2) -\frac{G m_1}{r_1} -\frac{G m_2}{r_2} + \frac{1}{2} \vec{v}^2 $$
+    
+	We can also here introduce the Jacobi constant, which is defined to be \(C_j = -2 \mathcal{E} \). Hence,
+    
+    
+	$$C_j = -2 \mathcal{E} = n^2 (x^2 + y^2) + 2 \left( \frac{G m_1}{r_1} + \frac{G m_2}{r_2} \right) + \vec{v}^2 $$
+    
+	Like energy, it is a constant of the motion.  Additional insight can be gained through the examination of the terms in the constant. Except for the kinetic component, all these terms depend on the position of the test particle.  Hence if we take  \( \vec{v} = 0 \). We can plot the contours of this constant in space. If we plot these contours we obtain a figure like the one below.
+    
+    
+	<br>
+    <figure>
+    <img src="./code/celestial_mechanics/cr3bp/jacobi_contours.png" width="50%" height="50%" class="center"/>
+    <figcaption>The countorus of the Jacobi Constant for a system where \(m_1 = 1\) and \(m_2 = 0.1\) </figcaption>
+    </figure>
+	<br>
+    
+	A few things are worth noting.  First, and most strikingly, the constant overall grows in near circles far from the planes. This is due to the centrifugal term, which grows quadratically with distance from the origin, while the gravitational terms shrink with distance. Second is that the constant is maximized at three locations, near \(m_1\), near \(m_2 \), and far from both masses.  There are equilibria at a total of five points. Three on the x-axis (to the left and right of either body and between them) and two off-axis.  These are the Lagrange points. In general, the points on the axis are always meta-stable, whereas the points off the axes are stable equilibria if the mass ratio \( \frac{m_1}{m_2} > \approx 25 \).
+    
+	It's also instructive to see what happens if we integrate the trajectory of our test particle for a few different initial conditions.  In each case, we'll show the view both in the rotating frame and in the inertial frame, for comparison.  We'll also show a black contour corresponding to the initial Jacobi constant of the particle.
+    
+	In our first case, we start the test particle close to \(m_1\) with only a small velocity.  We see that the particle orbits \(m_1\) and never interacts with the second mass \( m_2\).  Interstingly the trajectory in the rotating frame is bounded by our initial Jacobi constant.  This is not surprising, since we assumed \( \vec{v} = 0 \) when we plotted the countors. Hence, when our particle reaches these contours, its velocity drops to zero, and it falls back towards the planet. These zero-velocity contours, then, act as impassable walls, through which the particle cannot penetrate.  Evidently, for a particle with this Jacobi constant, there are only three 'types' of motion it can have.  Either it orbits the primary mass and never visits the secondary, it orbits the secondary and never visits the primary, or it orbits both masses at a distance, never approaching either of them.    
+    
+    
+	<br>
+    <figure>
+    <img src="./code/celestial_mechanics/cr3bp/inner_case.gif" width="50%" height="50%" class="center"/>
+    <figcaption>The zero-velocity contours and trajectory of a particle with low velocity near the primary mass.  The rotating frame is shown on the left and the inertial frame on the right.   </figcaption>
+    </figure>
+	<br>
+    
+	If we start the particle in the same position, but raise its velocity a bit, the zero velocity contours change, and a neck opens up between the primary and secondary regimes. While the trajectory is still confined to an inner domain between the bodies, it can now make close approaches to both and bounces between the two over time.
+    
+	<br>
+    <figure>
+    <img src="./code/celestial_mechanics/cr3bp/inner_case2.gif" width="50%" height="50%" class="center"/>
+    <figcaption>The zero-velocity contours and trajectory of a particle with higher velocity near the primary mass.  The rotating frame is shown on the left and the inertial frame on the right.   </figcaption>
+    </figure>
+	<br>
+    
+	If we increase the velocity of the particle even further, the inner and outer regimes connect and the particle can leave the two-body system, though it can only do so by passing close to the outer mass.  In the inertial frame, it's clear why this is.  The particle must get an extra 'boost' from the orbiting mass in order to increase its velocity enough to escape.   
+    
+	<br>
+    <figure>
+    <img src="./code/celestial_mechanics/cr3bp/inner_case3.gif" width="50%" height="50%" class="center"/>
+    <figcaption>The zero-velocity contours and trajectory of a particle with a much higher velocity near the primary mass.  The rotating frame is shown on the left and the inertial frame on the right.   </figcaption>
+    </figure>
+	<br>
+    
+	It's worth noting the same is true from an outside perspective. If instead I change the situation and start the test particle external to the binary it will bounce along the zero velocity surface.  It can only interact with the inner objects if its Jacobi constant is sufficiently small.  In such a case, where the constant is just small enough to allow interaction, it must pass near the secondary to do so. If this is not true, and the Jacobi constant is a bit larger, then the test particle would be prevented from ever interacting with either inner body.
+    
+    
+	<br>
+    <figure>
+    <img src="./code/celestial_mechanics/cr3bp/outer_case.gif" width="50%" height="50%" class="center"/>
+    <figcaption>The zero-velocity contours and trajectory of a particle with a much higher velocity near the primary mass.  The rotating frame is shown on the left and the inertial frame on the right.   </figcaption>
+    </figure>
+	<br>
+
+	</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
 
  
 </div>
