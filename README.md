@@ -11,6 +11,7 @@ This website's code is entirely open source and is hosted here.  In addition to 
 		* Kepler Elements
 		* Hamiltonians
 		* Liouville's Theorem
+                * Circular Restricted three-body Problem 
 	* Numerical Integration
 		* Intro to Finite Difference
 		* Explicit Runge-Kutta
